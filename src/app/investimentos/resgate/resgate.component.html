@@ -1,0 +1,36 @@
+<h1>RESGATE</h1>
+<div class="tbl-container bdr">
+    <table class="table bg-light">
+        <thead>
+            <tr>
+                <th>AÇÃO</th>
+                <th>SALDO ACUMULADO</th>
+                <th>VALOR A RESGATAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let acao of acoes">
+                <td>{{ acao.nome }}</td>
+                <td>{{ valorAcao(acao) | currency }}</td>
+                <td>
+                    <input 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                        [(ngModel)]="acao.valorResgate"
+                        class="form-control" 
+                        placeholder="Digite quanto quer resgatar"
+                    >
+                    <div class="invalid-feedback">
+                        O valor a ser resgatado não pode ser maior que {{ valorAcao(acao) | currency }}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row bg-light py-3 px-3 my-3 mx-0 destaque-info">
+    <span><strong>Valor total do resgate:</strong> {{ valorTotalResgate | currency }}</span>
+</div>
+<div class="d-flex justify-content-end mt-2">
+    <button class="btn btn-secondary mx-2 px-5" (click)="cancelar()">Cancelar</button>
+    <button class="btn btn-primary mx-2 px-5" (click)="resgatarValor()">Confirmar resgate</button>
+</div>

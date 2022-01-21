@@ -1,0 +1,35 @@
+<div class="page-wrap d-flex flex-row align-items-center" *ngIf="!showDetalhes">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <h1 class="my-5">INVESTIMENTOS</h1>
+
+        <table class="table bg-light">
+          <thead>
+            <tr>
+              <th scope="col">NOME</th>
+              <th scope="col">OBJETIVO</th>
+              <th scope="col">SALDO TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let inv of investimentos"
+              [ngClass]="{ comCarencia: inv.indicadorCarencia === 'S' }"
+              (click)="abrirDetalhes(inv)"
+            >
+              <td>{{ inv.nome }}</td>
+              <td>{{ inv.objetivo }}</td>
+              <td>{{ inv.saldoTotal | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-detalhes-investimento
+    *ngIf="showDetalhes"
+    (fecharDetalhes)="showDetalhes = false"
+    [investimento]="investimentoSelecionado"
+></app-detalhes-investimento>

@@ -1,0 +1,13 @@
+table {
+    border-radius: 10px;
+}
+
+tbody tr:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.comCarencia {
+    color: darkgray;
+    cursor: default !important;
+}

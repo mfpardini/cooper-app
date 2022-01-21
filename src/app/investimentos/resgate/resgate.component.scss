@@ -1,0 +1,19 @@
+$border-default: 2px solid #ccc !important;
+
+tbody td {
+    vertical-align: middle !important;
+}
+
+.invalid-feedback {
+    font-size: 100%;
+}
+
+.bdr {
+    border-radius: 5px !important;
+    border: $border-default;
+}
+
+.destaque-info {
+    border-radius: 10px;
+    border: $border-default;
+}

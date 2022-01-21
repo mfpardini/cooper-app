@@ -1,0 +1,14 @@
+$border-default: 2px solid #ccc !important;
+
+#info-detalhes {
+    border-radius: 10px;
+    border: $border-default;
+}
+
+.bord-right {
+    border-right: $border-default;
+}
+
+h6 {
+    color: #aaa;
+}

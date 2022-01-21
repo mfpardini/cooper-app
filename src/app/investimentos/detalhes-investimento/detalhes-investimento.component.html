@@ -1,0 +1,28 @@
+<div class="page-wrap d-flex flex-row align-items-center">
+  <div class="container">
+    <h1>DADOS DO INVESTIMENTO</h1>
+    <div
+      id="info-detalhes"
+      class="row justify-content-center bg-light py-3 my-3 mx-1"
+    >
+      <div class="col-md-4 bord-right py-2">
+        <h6>NOME</h6>
+        <h5>{{ investimento?.nome }}</h5>
+      </div>
+      <div class="col-md-4 bord-right py-2">
+        <h6>OBJETIVO</h6>
+        <h5>{{ investimento?.objetivo }}</h5>
+      </div>
+      <div class="col-md-4 py-2">
+        <h6>SALDO TOTAL</h6>
+        <h5>{{ investimento?.saldoTotal | currency }}</h5>
+      </div>
+    </div>
+
+    <app-resgate
+      [investimento]="investimento"
+      (cancelarResgate)="voltar()"
+    ></app-resgate>
+  </div>
+</div>
+
