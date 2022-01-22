@@ -6,7 +6,6 @@ import localePt from '@angular/common/locales/pt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalBasicComponent } from './shared/modal-basic/modal-basic.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ListaInvestimentosComponent } from './investimentos/lista-investimentos/lista-investimentos.component';
 import { registerLocaleData } from '@angular/common';
@@ -14,17 +13,18 @@ import { DetalhesInvestimentoComponent } from './investimentos/detalhes-investim
 import { ResgateComponent } from './investimentos/resgate/resgate.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { FormsModule } from '@angular/forms';
+import { ModalResgateComponent } from './investimentos/modal-resgate/modal-resgate.component';
 
 registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalBasicComponent,
     PageNotFoundComponent,
     ListaInvestimentosComponent,
     DetalhesInvestimentoComponent,
-    ResgateComponent
+    ResgateComponent,
+    ModalResgateComponent
   ],
   imports: [
     BrowserModule,

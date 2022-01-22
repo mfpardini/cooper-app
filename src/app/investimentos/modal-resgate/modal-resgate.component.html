@@ -1,0 +1,27 @@
+<div class="modal-header" style="border-bottom: none;">
+    <button type="button" class="close d-flex" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+        <div *ngIf="dados.sucesso">
+            <h2>Resgate efetuado com sucesso!</h2>
+        </div>
+        <div *ngIf="!dados.sucesso">
+            <h2 class="mb-4">DADOS INVÁLIDOS!</h2>
+            <p>Voce preencheu um ou mais campos com um valor acima do permitido:</p>
+            <p *ngFor="let acao of dados.acoes" class="my-0">
+                <span *ngIf="acao.valorResgate > 0 && acao.valorResgate > acao.valorAcao">
+                    <strong>{{ acao.acao.nome }}</strong>: O valor a resgatar não pode ser maior que {{ acao.valorAcao | currency }}
+                </span>
+            </p>
+        </div>
+
+    </div>
+  <div class="modal-footer justify-content-center" style="border-top: none;">
+    <button
+        class="btn btn-primary" 
+        (click)="activeModal.close('Close click')"
+        
+    >{{ dados.sucesso ? 'NOVO RESGATE' : 'CORRIGIR'}}</button>
+  </div>

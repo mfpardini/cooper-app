@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalBasicComponent } from './modal-basic.component';
+import { ModalResgateComponent } from './modal-resgate.component';
 
-describe('ModalBasicComponent', () => {
-  let component: ModalBasicComponent;
-  let fixture: ComponentFixture<ModalBasicComponent>;
+describe('ModalResgateComponent', () => {
+  let component: ModalResgateComponent;
+  let fixture: ComponentFixture<ModalResgateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalBasicComponent ]
+      declarations: [ ModalResgateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalBasicComponent);
+    fixture = TestBed.createComponent(ModalResgateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

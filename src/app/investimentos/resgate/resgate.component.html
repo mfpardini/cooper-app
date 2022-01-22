@@ -10,17 +10,18 @@
         </thead>
         <tbody>
             <tr *ngFor="let acao of acoes">
-                <td>{{ acao.nome }}</td>
-                <td>{{ valorAcao(acao) | currency }}</td>
+                <td>{{ acao.acao.nome }}</td>
+                <td>{{ acao.valorAcao | currency }}</td>
                 <td>
                     <input 
                         currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                         [(ngModel)]="acao.valorResgate"
-                        class="form-control" 
+                        class="form-control align-left" 
                         placeholder="Digite quanto quer resgatar"
+                        [ngClass]="{'is-invalid': valorInvalido(acao)}"
                     >
                     <div class="invalid-feedback">
-                        O valor a ser resgatado não pode ser maior que {{ valorAcao(acao) | currency }}
+                        O valor a ser resgatado não pode ser maior que {{ acao.valorAcao | currency }}
                     </div>
                 </td>
             </tr>
@@ -32,5 +33,8 @@
 </div>
 <div class="d-flex justify-content-end mt-2">
     <button class="btn btn-secondary mx-2 px-5" (click)="cancelar()">Cancelar</button>
-    <button class="btn btn-primary mx-2 px-5" (click)="resgatarValor()">Confirmar resgate</button>
+    <button class="btn btn-primary mx-2 px-5"
+     (click)="resgatarValor()"
+     [disabled]="valorTotalResgate <= 0"
+     >Confirmar resgate</button>
 </div>

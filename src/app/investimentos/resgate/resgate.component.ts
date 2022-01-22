@@ -1,6 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Acao } from 'src/app/models/acao.model';
 import { Investimento } from 'src/app/models/investimento.model';
+import { ModalResgateComponent } from '../modal-resgate/modal-resgate.component';
+
+export interface Resgate {
+  acao: Acao,
+  valorAcao: number,
+  valorResgate: any
+}
 
 @Component({
   selector: 'app-resgate',
@@ -12,16 +20,18 @@ export class ResgateComponent implements OnInit {
   @Input() investimento!: Investimento;
   @Output() cancelarResgate = new EventEmitter();
 
-  valoresResgate: Array<any> = [];
+  acoes: Array<Resgate> = [];
 
-  acoes: Array<any> = [];
-
-  constructor() { }
+  constructor(
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
-    this.acoes = this.investimento.acoes.map(acao => {
+    this.acoes = this.investimento.acoes.map(acaoOrg => {
       return {
-        ...acao, valorResgate: 0
+        acao: acaoOrg,
+        valorAcao: this.valorAcao(acaoOrg),
+        valorResgate: 0
       };
     })
   }
@@ -38,8 +48,38 @@ export class ResgateComponent implements OnInit {
     return valorTotal;
   }
 
+  valorInvalido(acao: Resgate) {
+    return acao.valorResgate > this.valorAcao(acao.acao);
+  }
+
   resgatarValor() {
-    
+
+    if (this.valorTotalResgate <= 0) {
+      return;
+    }
+
+    const contemErro = this.acoes.filter(acao => {
+      return this.valorInvalido(acao);
+    })
+
+    if (this.valorTotalResgate > this.investimento.saldoTotal) {
+      this.abrirModalResgate(false);
+    } else if (contemErro.length > 0) {
+      this.abrirModalResgate(false);
+    } else {
+      this.abrirModalResgate(true);
+    }
+  }
+
+  abrirModalResgate(sucesso: boolean): void {
+    const modalRef = this.modalService.open(ModalResgateComponent, {
+      size: 'lg',
+      centered: true
+    });
+    modalRef.componentInstance.dados = {
+      sucesso: sucesso,
+      acoes: this.acoes,
+    }
   }
 
   cancelar() {
